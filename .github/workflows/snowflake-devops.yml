@@ -22,6 +22,16 @@ jobs:
         with:
           python-version: 3.8
 
+- name: Debug environment variables
+  run: |
+    echo "SF_ACCOUNT: ${SF_ACCOUNT:-<empty>}"
+    echo "SF_USER: ${SF_USER:+[set]}"
+    echo "SF_PASSWORD: ${SF_PASSWORD:+[set]}"
+  env:
+    SF_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+    SF_USER: ${{ secrets.SNOWFLAKE_USER }}
+    SF_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+
       - name: Run schemachange
         env:
           SF_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
