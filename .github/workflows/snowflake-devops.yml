@@ -2,9 +2,8 @@ name: snowflake-devops-demo
 
 # Controls when the action will run. 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
     paths:
       - 'dbscripts/**'
 
