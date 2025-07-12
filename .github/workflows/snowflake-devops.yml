@@ -1,5 +1,5 @@
 name: snowflake-devops
-# Controls when the action will run. 
+
 on:
   push:
     branches:
@@ -7,12 +7,12 @@ on:
     paths:
       - 'Snowflake_Learning/**'
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   deploy-snowflake-changes-job:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -22,15 +22,15 @@ jobs:
         with:
           python-version: 3.8
 
-- name: Debug environment variables
-  run: |
-    echo "SF_ACCOUNT: ${SF_ACCOUNT:-<empty>}"
-    echo "SF_USER: ${SF_USER:+[set]}"
-    echo "SF_PASSWORD: ${SF_PASSWORD:+[set]}"
-  env:
-    SF_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-    SF_USER: ${{ secrets.SNOWFLAKE_USER }}
-    SF_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      - name: Debug environment variables
+        run: |
+          echo "SF_ACCOUNT: ${SF_ACCOUNT:-<empty>}"
+          echo "SF_USER: ${SF_USER:+[set]}"
+          echo "SF_PASSWORD: ${SF_PASSWORD:+[set]}"
+        env:
+          SF_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SF_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SF_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
 
       - name: Run schemachange
         env:
