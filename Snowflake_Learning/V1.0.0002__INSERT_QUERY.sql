@@ -1,3 +1,4 @@
+--For Table Inserts
 INSERT INTO my_favorite_actors
 VALUES
   ('Heath Ledger'),
