@@ -34,7 +34,7 @@ jobs:
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
         run: |
-          schemachange -f dbscripts \
+          schemachange -f Snowflake_Learning \
             -a $SF_ACCOUNT \
             -u $SF_USERNAME \
             -r $SF_ROLE \
