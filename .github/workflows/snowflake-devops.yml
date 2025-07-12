@@ -1,31 +1,39 @@
+name: snowflake-devops
+
+# Controls when the action will run. 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Snowflake_Learning/**'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
-  deploy:
+  deploy-snowflake-changes-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Use Python 3.8.x
+        uses: actions/setup-python@v2.2.1
         with:
-          python-version: '3.8'
-
-      - name: Install schemachange
-        run: |
-          python -m pip install --upgrade pip
-          pip install schemachange
+          python-version: 3.8.x
 
       - name: Run schemachange
         env:
           SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
-          SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
           SF_ROLE: ${{ secrets.SF_ROLE }}
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
-          SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
-        run: |
+          SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
+       run: |
           schemachange -f Snowflake_Learning \
             -a $SF_ACCOUNT \
             -u $SF_USERNAME \
@@ -35,3 +43,10 @@ jobs:
             -s $SF_SCHEMA \
             -c $SF_DATABASE.$SF_SCHEMA.CHANGE_HISTORY \
             --create-change-history-table
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          python --version
+          echo "Step 1: Installing schemachange"
+          pip install schemachange
+          
+          echo "Step 2: Running schemachange"
+          schemachange -f $GITHUB_WORKSPACE/Snowflake_Learning -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
