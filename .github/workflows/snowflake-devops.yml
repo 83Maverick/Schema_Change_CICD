@@ -36,13 +36,14 @@ jobs:
           pip install schemachange
 
           echo "Running schemachange..."
-          schemachange deploy \
-            -f $GITHUB_WORKSPACE/Snowflake_Learning \
-            -a $SNOWFLAKE_ACCOUNT \
-            -u $SNOWFLAKE_USER \
-            -r $SNOWFLAKE_ROLE \
-            -w $SNOWFLAKE_WAREHOUSE \
-            -d $SNOWFLAKE_DATABASE \
-            -s $SNOWFLAKE_SCHEMA \
-            -c $SNOWFLAKE_DATABASE.$SNOWFLAKE_SCHEMA.CHANGE_HISTORY \
-            --create-change-history-table
+         schemachange deploy \
+        -f $GITHUB_WORKSPACE/Snowflake_Learning \
+        -a $SNOWFLAKE_ACCOUNT \
+        -u $SNOWFLAKE_USER \
+        -r $SNOWFLAKE_ROLE \
+        -w $SNOWFLAKE_WAREHOUSE \
+        -d $SNOWFLAKE_DATABASE \
+        -s $SNOWFLAKE_SCHEMA \
+        -c $SNOWFLAKE_DATABASE.$SNOWFLAKE_SCHEMA.CHANGE_HISTORY \
+      --create-change-history-table
+
