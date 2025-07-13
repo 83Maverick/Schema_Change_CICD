@@ -29,8 +29,8 @@ jobs:
           SNOWFLAKE_ROLE: ${{ secrets.SF_ROLE }}
           SNOWFLAKE_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SNOWFLAKE_DATABASE: ${{ secrets.SF_DATABASE }}
+          SNOWFLAKE_SCHEMA: ${{ secrets.SF_SCHEMA }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
-          SNOWFLAKE_SCHEMA: Snowflake_Learning  # You can also make this a secret if needed
         run: |
           echo "Installing schemachange..."
           pip install schemachange
