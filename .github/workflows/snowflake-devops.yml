@@ -1,5 +1,6 @@
-name: snowflake-devops-deploy
+name: snowflake-devops
 
+# Controls when the action will run. 
 on:
   push:
     branches:
@@ -7,6 +8,7 @@ on:
     paths:
       - 'Snowflake_Learning/**'
 
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -14,36 +16,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Python 3.8
+      - name: Use Python 3.8.x
         uses: actions/setup-python@v2.2.1
         with:
-          python-version: 3.8
+          python-version: 3.8.x
 
-      - name: Install and Run schemachange
+      - name: Run schemachange
         env:
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SF_USERNAME }}
-          SNOWFLAKE_ROLE: ${{ secrets.SF_ROLE }}
-          SNOWFLAKE_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
-          SNOWFLAKE_DATABASE: ${{ secrets.SF_DATABASE }}
+          SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+          SF_ROLE: ${{ secrets.SF_ROLE }}
+          SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+          SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_SCHEMA: ${{ secrets.SF_SCHEMA }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
         run: |
-          echo "Installing schemachange..."
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          python --version
+          echo "Step 1: Installing schemachange"
           pip install schemachange
-
-          echo "Running schemachange..."
-         schemachange deploy \
-        -f $GITHUB_WORKSPACE/Snowflake_Learning \
-        -a $SNOWFLAKE_ACCOUNT \
-        -u $SNOWFLAKE_USER \
-        -r $SNOWFLAKE_ROLE \
-        -w $SNOWFLAKE_WAREHOUSE \
-        -d $SNOWFLAKE_DATABASE \
-        -s $SNOWFLAKE_SCHEMA \
-        -c $SNOWFLAKE_DATABASE.$SNOWFLAKE_SCHEMA.CHANGE_HISTORY \
-      --create-change-history-table
-
+          
+          echo "Step 2: Running schemachange"
+          schemachange -f $GITHUB_WORKSPACE/Snowflake_Learning -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.Snowflake_Learning.CHANGE_HISTORY --create-change-history-table
