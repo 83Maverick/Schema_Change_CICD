@@ -41,4 +41,4 @@ INSERT ALL
     SELECT member_seq.NEXTVAL AS member_id, points_balance, started_date, 
            ended_date, registered_date, firstname, lastname, gender, age, 
            email, street, city, state, zip, phone
-    FROM SNOWBEARAIR_DB.MODELED.MEMBERS;
+    FROM MEMBERS;
