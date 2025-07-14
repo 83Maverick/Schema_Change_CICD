@@ -24,8 +24,6 @@ CREATE OR REPLACE TABLE member_phone (
    phone VARCHAR
 );
 
-
-
 -- Insert into member table
 INSERT INTO member (
     member_id, points_balance, started_date, ended_date,
@@ -48,4 +46,3 @@ INSERT INTO member_phone (
 ) VALUES (
     'M001', '555-123-4567'
 );
-
