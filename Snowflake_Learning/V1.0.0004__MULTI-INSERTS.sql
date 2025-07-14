@@ -36,9 +36,6 @@ INSERT ALL
     VALUES (member_id, street, city, state, zip)
     
     INTO member_phone(member_id, phone)
-    VALUES (member_id, phone)
+    VALUES (member_id, phone);
     
-    SELECT  member_id, points_balance, started_date, 
-           ended_date, registered_date, firstname, lastname, gender, age, 
-           email, street, city, state, zip, phone
-    FROM member;
+    
