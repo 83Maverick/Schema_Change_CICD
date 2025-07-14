@@ -1,5 +1,5 @@
 CREATE OR REPLACE TABLE member (
-   member_id INTEGER DEFAULT member_seq.nextval,
+   member_id INTEGER,
    points_balance NUMBER,
    started_date DATE,
    ended_date DATE,
