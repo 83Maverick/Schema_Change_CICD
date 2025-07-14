@@ -26,16 +26,15 @@ CREATE OR REPLACE TABLE member_phone (
 
 
 
-INSERT ALL
-    INTO member(member_id, points_balance, started_date, ended_date,
+INSERT INTO member(member_id, points_balance, started_date, ended_date,
             registered_date, firstname, lastname, gender, age, email)
     VALUES (member_id, points_balance, started_date, ended_date,
-            registered_date, firstname, lastname, gender, age, email)
+            registered_date, firstname, lastname, gender, age, email);
             
-    INTO member_address (member_id, street, city, state, zip)
-    VALUES (member_id, street, city, state, zip)
+INSERT INTO member_address (member_id, street, city, state, zip)
+    VALUES (member_id, street, city, state, zip);
     
-    INTO member_phone(member_id, phone)
+INSERT INTO member_phone(member_id, phone)
     VALUES (member_id, phone);
     
     
