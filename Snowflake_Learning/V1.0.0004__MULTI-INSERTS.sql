@@ -1,5 +1,5 @@
 CREATE OR REPLACE TABLE member (
-   member_id INTEGER,
+   member_id VARCHAR,
    points_balance NUMBER,
    started_date DATE,
    ended_date DATE,
@@ -12,7 +12,7 @@ CREATE OR REPLACE TABLE member (
 );
 
 CREATE OR REPLACE TABLE member_address (
-   member_id INTEGER,
+   member_id VARCHAR,
    street VARCHAR,
    city VARCHAR,
    state VARCHAR,
@@ -20,7 +20,7 @@ CREATE OR REPLACE TABLE member_address (
 );
 
 CREATE OR REPLACE TABLE member_phone (
-   member_id INTEGER,
+   member_id VARCHAR,
    phone VARCHAR
 );
 
